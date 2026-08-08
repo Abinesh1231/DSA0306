@@ -12,8 +12,8 @@ parser=EarleyChartParser(grammer)
 a="the dog chased the cat".split()
 tree=list(parser.parse(a))
 if tree:
-  print(tree)
+  print("Parse Tree")
   for i in tree:
-    print(i)
+    i.pretty_print()
 else:
   print("No tree")
