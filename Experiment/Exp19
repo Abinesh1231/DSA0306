@@ -1,0 +1,14 @@
+import nltk
+nltk.download('wordnet')
+nltk.download('omw-1.4')
+from nltk.wsd import lesk
+sentence="I went to the bank to deposit money"
+words=sentence.split()
+result=lesk(words,"bank")
+print("Sentence:",sentence)
+print("Ambiguous word: bank")
+if result:
+  print("Selected sense:",result.name())
+  print("Definition:",result.definition())
+else:
+  print("No sense found")
