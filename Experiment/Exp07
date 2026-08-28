@@ -1,0 +1,13 @@
+#7
+import nltk
+
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger_eng')
+nltk.download('punkt_tab') # Added to resolve LookupError
+
+text = "The student is studying machine learning."
+
+words = nltk.word_tokenize(text)
+tags = nltk.pos_tag(words)
+
+print(tags)
