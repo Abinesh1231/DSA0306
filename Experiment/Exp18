@@ -1,0 +1,18 @@
+#18
+import re
+
+def fopc_parser(expr):
+    pattern = r'^(forall|exists)\s+[a-z]\s*\(\s*[A-Za-z]+\([a-z]\)\s*\)$'
+
+    if re.match(pattern, expr):
+        return "Valid FOPC Expression"
+    return "Invalid FOPC Expression"
+
+expressions = [
+    "forall x (Human(x))",
+    "exists y (Student(y))",
+    "Human(x)"
+]
+
+for e in expressions:
+    print(e, "->", fopc_parser(e))
