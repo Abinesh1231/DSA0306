@@ -1,0 +1,21 @@
+#20
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+
+documents = [
+    "Machine learning is useful",
+    "Deep learning uses neural networks",
+    "Machine learning and deep learning are popular"
+]
+
+query = ["machine learning"]
+
+vectorizer = TfidfVectorizer()
+X = vectorizer.fit_transform(documents + query)
+
+scores = cosine_similarity(X[-1], X[:-1]).flatten()
+
+for i, score in enumerate(scores):
+    print("Document", i+1, ":", round(score, 3))
+
+print("Best Document:", scores.argmax() + 1)
