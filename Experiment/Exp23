@@ -1,0 +1,20 @@
+#23
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+
+text = [
+    "Machine learning is a branch of artificial intelligence.",
+    "Machine learning algorithms learn from data.",
+    "These algorithms are used for prediction and classification."
+]
+
+vectorizer = TfidfVectorizer()
+X = vectorizer.fit_transform(text)
+
+scores = []
+for i in range(len(text)-1):
+    score = cosine_similarity(X[i], X[i+1])[0][0]
+    scores.append(score)
+
+print("Coherence Scores:", [round(s, 2) for s in scores])
+print("Average Coherence:", round(sum(scores)/len(scores), 2))
