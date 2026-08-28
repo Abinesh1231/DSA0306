@@ -1,0 +1,26 @@
+#11
+grammar = {
+    "S": [["NP", "VP"]],
+    "NP": [["Det", "N"]],
+    "VP": [["V", "NP"]],
+    "Det": [["the"]],
+    "N": [["cat"], ["dog"]],
+    "V": [["sees"]]
+}
+
+def parse(symbol, words, pos=0):
+    if symbol not in grammar:
+        return pos + 1 if pos < len(words) and words[pos] == symbol else None
+
+    for rule in grammar[symbol]:
+        p = pos
+        for x in rule:
+            p = parse(x, words, p)
+            if p is None:
+                break
+        else:
+            return p
+    return None
+
+sentence = "the cat sees the dog".split()
+print("Accepted" if parse("S", sentence) == len(sentence) else "Rejected")
