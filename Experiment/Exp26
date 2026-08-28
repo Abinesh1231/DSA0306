@@ -1,0 +1,12 @@
+#26
+! pip install -q transformers sentencepiece
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+model_name = "Helsinki-NLP/opus-mt-en-fr"
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
+english_text = "Hello, how are you? I am learning NLP"
+inputs = tokenizer(english_text, return_tensors="pt")
+outputs = model.generate(**inputs)
+french_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
+print("English:", english_text)
+print("French:", french_text)
