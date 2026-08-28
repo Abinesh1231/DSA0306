@@ -1,0 +1,23 @@
+#14
+grammar = {
+    "S": {
+        "singular": ["NP_s", "VP_s"],
+        "plural": ["NP_p", "VP_p"]
+    }
+}
+
+def check_agreement(subject, verb):
+    singular_subjects = ["he", "she", "cat"]
+    plural_subjects = ["they", "we", "cats"]
+
+    singular_verbs = ["runs", "eats", "plays"]
+    plural_verbs = ["run", "eat", "play"]
+
+    if subject in singular_subjects and verb in singular_verbs:
+        return "Agreement Correct"
+    elif subject in plural_subjects and verb in plural_verbs:
+        return "Agreement Correct"
+    return "Agreement Error"
+
+print(check_agreement("he", "runs"))
+print(check_agreement("they", "runs"))
