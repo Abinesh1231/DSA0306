@@ -1,0 +1,19 @@
+#10
+words = ["The", "cat", "is", "running", "quickly"]
+
+# Initial tagging
+tags = ["NN", "NN", "NN", "NN", "NN"]
+
+# Transformation rules
+for i, word in enumerate(words):
+    if word.lower() in ["the", "a", "an"]:
+        tags[i] = "DT"
+    elif word.lower() in ["is", "are", "am"]:
+        tags[i] = "VB"
+    elif word.endswith("ing"):
+        tags[i] = "VBG"
+    elif word.endswith("ly"):
+        tags[i] = "RB"
+
+for word, tag in zip(words, tags):
+    print(word, "->", tag)
