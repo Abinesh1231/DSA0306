@@ -1,0 +1,19 @@
+#6
+import random
+
+text = "I like machine learning. I like natural language processing. Machine learning is useful."
+words = text.lower().replace(".", "").split()
+
+bigrams = {}
+for i in range(len(words)-1):
+    bigrams.setdefault(words[i], []).append(words[i+1])
+
+word = "i"
+result = [word]
+
+for _ in range(10):
+    word = random.choice(bigrams.get(word, ["learning"]))
+    result.append(word)
+
+print("Generated Text:")
+print(" ".join(result))
