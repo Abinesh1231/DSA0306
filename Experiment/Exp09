@@ -1,0 +1,18 @@
+#9
+import re
+
+words = "The boys are playing happily".split()
+
+for word in words:
+    if re.match(r'.*ly$', word):
+        tag = "RB"
+    elif re.match(r'.*ing$', word):
+        tag = "VBG"
+    elif word.lower() in ["the", "a", "an"]:
+        tag = "DT"
+    elif word.lower() in ["are", "is", "am"]:
+        tag = "VB"
+    else:
+        tag = "NN"
+
+    print(word, "->", tag)
