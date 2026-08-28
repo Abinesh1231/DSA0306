@@ -1,0 +1,44 @@
+#12
+grammar = {
+    "S": [["NP", "VP"]],
+    "NP": [["Det", "N"]],
+    "VP": [["V", "NP"]],
+    "Det": [["the"]],
+    "N": [["cat"], ["dog"]],
+    "V": [["sees"]]
+}
+
+def earley(words):
+    chart = [set() for _ in range(len(words) + 1)]
+    chart[0].add(("S", tuple(grammar["S"][0]), 0))
+
+    for i in range(len(words) + 1):
+        changed = True
+        while changed:
+            changed = False
+            for lhs, rhs, dot in list(chart[i]):
+                if dot < len(rhs):
+                    sym = rhs[dot]
+
+                    if sym in grammar:       # Predict
+                        for rule in grammar[sym]:
+                            item = (sym, tuple(rule), 0)
+                            if item not in chart[i]:
+                                chart[i].add(item)
+                                changed = True
+
+                    elif i < len(words) and sym == words[i]:  # Scan
+                        chart[i+1].add((lhs, rhs, dot+1))
+
+                else:                         # Complete
+                    for l, r, d in list(chart[i]):
+                        if d < len(r) and r[d] == lhs:
+                            item = (l, r, d+1)
+                            if item not in chart[i]:
+                                chart[i].add(item)
+                                changed = True
+
+    return ("S", tuple(grammar["S"][0]), 1) in chart[len(words)]
+
+sentence = "the cat sees the dog".split()
+print("Accepted" if earley(sentence) else "Rejected")
