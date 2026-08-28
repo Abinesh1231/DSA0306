@@ -1,0 +1,15 @@
+#8
+import random
+
+tags = {
+    "I": ["PRP"],
+    "like": ["VB", "IN"],
+    "cats": ["NNS"],
+    "run": ["VB", "NN"]
+}
+
+sentence = "I like cats"
+
+for word in sentence.split():
+    tag = random.choice(tags.get(word, ["NN"]))
+    print(word, "->", tag)
