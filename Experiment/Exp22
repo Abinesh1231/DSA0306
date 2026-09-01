@@ -1,0 +1,16 @@
+#22
+import spacy
+
+!python -m spacy download en_core_web_sm -q
+nlp = spacy.load("en_core_web_sm")
+
+text = "John went to the market. He bought some fruits."
+doc = nlp(text)
+
+last_noun = None
+
+for token in doc:
+    if token.pos_ == "PROPN":
+        last_noun = token.text
+    if token.text.lower() in ["he", "she", "they"]:
+        print(token.text, "->", last_noun)
