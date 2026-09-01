@@ -1,0 +1,9 @@
+Pretrained model directory
+
+Model: typeform/distilbert-base-uncased-mnli
+Task: zero-shot classification via MNLI entailment
+
+Run from backend:
+python -m app.ml.train_model
+
+The binary weights are downloaded by that command and are intentionally not embedded in this source archive.
